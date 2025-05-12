@@ -1,6 +1,7 @@
 package com.jobportal.demo.job_portal.service;
 
 import com.jobportal.demo.job_portal.dto.LoginDTO;
+import com.jobportal.demo.job_portal.dto.ProfileDTO;
 import com.jobportal.demo.job_portal.dto.ResponseDTO;
 import com.jobportal.demo.job_portal.dto.UserDTO;
 import com.jobportal.demo.job_portal.exception.JobPortalException;
@@ -8,6 +9,8 @@ import com.jobportal.demo.job_portal.exception.JobPortalException;
 public interface UserService {
 
     UserDTO registerUser(UserDTO userDTO) throws JobPortalException;
+
+    UserDTO createUser(UserDTO userDTO) throws JobPortalException;
 
 
     public UserDTO loginUser(LoginDTO loginDTO) throws JobPortalException;

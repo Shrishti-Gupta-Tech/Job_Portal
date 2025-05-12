@@ -54,6 +54,37 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return user.toDTO();
     }
+    @Override
+    public UserDTO createUser(UserDTO userDTO) throws JobPortalException {
+        Optional<User> optional = userRepository.findByEmail(userDTO.getEmail());
+
+        if (optional.isEmpty()) {
+            throw new JobPortalException("USER_NOT_FOUND");
+        }
+
+        User user = optional.get();
+
+        user.setUserName(userDTO.getUserName());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setRole(userDTO.getRole());
+        user.setJobTitle(userDTO.getJobTitle());
+        user.setCompany(userDTO.getCompany());
+        user.setCompanyLocation(userDTO.getCompanyLocation());
+        user.setAbout(userDTO.getAbout());
+        user.setSkills(userDTO.getSkills());
+        user.setCertificates(userDTO.getCertificates());
+        user.setExperiences(userDTO.getExperiences());
+
+        // Don't change ID or profileID if not provided
+        if (userDTO.getProfileID() != null) {
+            user.setProfileID(userDTO.getProfileID());
+        }
+
+        userRepository.save(user);
+
+        return user.toDTO();
+    }
 
     @Override
     public UserDTO loginUser(LoginDTO loginDTO) throws JobPortalException {

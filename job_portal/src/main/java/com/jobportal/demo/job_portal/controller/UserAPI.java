@@ -27,7 +27,13 @@ public class UserAPI
         userDTO = userService.registerUser(userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
-    @PostMapping("/login")
+
+    @PutMapping("/create") // New endpoint for creating a user
+    public ResponseEntity<UserDTO> createUser(@RequestBody @Valid UserDTO userDTO) throws JobPortalException {
+        UserDTO createdUser = userService.createUser(userDTO);
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+    }
+@PostMapping("/login")
     public ResponseEntity <UserDTO> loginUser(@RequestBody @Valid LoginDTO loginDTO) throws JobPortalException {
 
         return new ResponseEntity<>(userService.loginUser(loginDTO), HttpStatus.OK);

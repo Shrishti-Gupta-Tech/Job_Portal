@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -29,10 +31,22 @@ public class UserDTO {
     private String phoneNumber;
     private Role role;
 
+    private String jobTitle;
+    private String company;
+    private String companyLocation;
+    private String about;
+    private List<String> skills;
+    private List<Certificate> certificates;
+    private List<Experience> experiences;
+
     private Long profileID;
 
     public User toEntity()  {
-        return new User(this.id,this.userName,this.password,this.email,this.phoneNumber,this.role,this.profileID);
+        return new User(
+                this.id, this.userName, this.password, this.email, this.phoneNumber,
+                this.role, this.profileID, this.jobTitle, this.company, this.companyLocation,
+                this.about, this.skills, this.certificates, this.experiences
+        );
     }
 }
 
